@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.mappers.DocMapper">
+
+    <!-- 문서 분류 목록 -->
+    <select id="readCategory" resultType="com.doc.domain.CategoryVO">
+    	SELECT CODE, UPPER_CODE, NAME
+			FROM DOC_CATEGORY
+				START WITH UPPER_CODE IS NULL
+			CONNECT BY PRIOR  CODE = UPPER_CODE
+			ORDER BY SIBLINGS BY CODE 
+    </select>
+    
+    <!-- 문서 요약 목록 -->
+    <select id="readDocList" resultType="com.doc.domain.DocVO">
+    	SELECT A.DOC_IDX,A.TITLE, B.NAME, 
+    			TO_CHAR(A.WRITE_DATE,'MM-DD') AS WRITE_DATE, A.VIEW_COUNT, A.CATEGORY
+			FROM DOC_SUMMARY A INNER JOIN USER B ON A.WRITER = B.USERNAME
+			<if test="code != null">
+				WHERE CATEGORY = #{code}
+			</if>
+    </select>
+    
+    <!-- 문서 상세 -->
+    <select id="readDocDetail" resultType="com.doc.domain.DetailVO">
+    	SELECT A.DOC_IDX, A.TITLE, B.DETAIL, C.NAME,
+			TO_CHAR(A.WRITE_DATE,'MM-DD') AS WRITE_DATE, A.VIEW_COUNT
+		FROM DOC_SUMMARY A 
+			INNER JOIN DOC_DETAIL B ON A.DOC_IDX = B.DOC_IDX
+			INNER JOIN USER C ON A.WRITER = C.USERNAME
+		WHERE A.DOC_IDX = #{docIdx}
+    </select>
+    
+    <!-- 문서 요약 생성 -->
+    <insert id="createDocSummary" parameterType="com.doc.domain.DetailVO" >
+    	<selectKey keyProperty="docIdx" resultType="String" order="BEFORE">
+    		SELECT LPAD(DOC_SUMMARY_SEQ.NEXTVAL, 10, '0') FROM DUAL
+    	</selectKey>
+    	INSERT INTO DOC_SUMMARY (DOC_IDX, TITLE, WRITER, WRITE_DATE, REWRITER, REWRITE_DATE, VIEW_COUNT, CATEGORY ) 
+    		VALUES (#{docIdx}, #{title}, #{writer}, sysdate, null, null, 0, #{category});
+    </insert>
+    
+    <!-- 문서 요약 수정 -->
+    <update id="updateDocSummary" parameterType="com.doc.domain.DetailVO" >
+    	UPDATE DOC_SUMMARY SET 
+   			TITLE = #{title}, REWRITER = #{rewriter}, REWRITE_DATE = sysdate, CATEGORY = #{category}
+   		WHERE DOC_IDX = #{docIdx}
+    </update>
+    
+    <!-- 문서 요약 삭제 -->
+    <delete id="deleteDocSummary" parameterType="com.doc.domain.DetailVO" >
+    	DELETE DOC_SUMMARY WHERE DOC_IDX = #{docIdx}
+    </delete>
+    
+    <!-- 문서 상세 생성 -->
+    <insert id="createDocDetail" parameterType="com.doc.domain.DetailVO" >
+    	INSERT INTO DOC_DETAIL (DOC_IDX, DETAIL) 
+    		VALUES (#{docIdx}, #{detail});
+    </insert>
+    
+    <!-- 문서 상세 수정 -->
+    <update id="updateDocDetail" parameterType="com.doc.domain.DetailVO" >
+    	UPDATE DOC_DETAIL SET 
+   			DETAIL = #{detail}
+   		WHERE DOC_IDX = #{docIdx}
+    </update>
+    
+    <!-- 문서 상세 삭제 -->
+    <delete id="deleteDocDetail" parameterType="com.doc.domain.DetailVO" >
+    	DELETE DOC_DETAIL WHERE DOC_IDX = #{docIdx}
+    </delete>
+    
+    
+</mapper>
