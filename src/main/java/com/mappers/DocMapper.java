@@ -14,7 +14,7 @@ import com.doc.domain.DocVO;
 @Mapper
 public interface DocMapper {
 
-	List<DocVO> readDocList(CategoryVO categoryVO);
+	List<DocVO> readDocList(String categoryCode);
 	
 	public DetailVO readDocDetail(DocVO docVO);
 	

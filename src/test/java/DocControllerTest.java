@@ -60,10 +60,10 @@ public class DocControllerTest {
               .andExpect(jsonPath("$.authorities[*].authority", hasItem("USER")))
               .andReturn()
               ;
-         System.out.println(result.getResponse());
          
-         mvc.perform(get("/doc")
+         /*mvc.perform(get("/doc")
         		 .header("x-auth-token", "1")
+        		 //.param("categoryCode", "1")
                  .contentType(MediaType.APPLICATION_JSON_UTF8)
                  .content(om.writeValueAsString(request)))
             .andExpect(status().isOk())
@@ -74,8 +74,16 @@ public class DocControllerTest {
          mvc.perform(get("/doc/detail")
         		 .header("x-auth-token", "1")
                  .contentType(MediaType.APPLICATION_JSON_UTF8)
-                 .content("{\"docIdx\":\"0000000003\"}"))
+                 .content("{\"docIdx\":\"0000000012\"}"))
             .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8)).andDo(print())
+            ;*/
+         
+         mvc.perform(post("/doc")
+        		 .header("x-auth-token", "1")
+                 .contentType(MediaType.APPLICATION_JSON_UTF8)
+                 .content("{\"title\":\"한글 테스트\",\"detail\":\"한글 테스트\"}"))
+            .andExpect(status().isCreated())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8)).andDo(print())
             ;
     }

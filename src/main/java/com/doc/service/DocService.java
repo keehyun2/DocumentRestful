@@ -13,7 +13,7 @@ public interface DocService {
 	 * @param categoryVO
 	 * @return
 	 */
-	public List<DocVO> readDocList(CategoryVO categoryVO);
+	public List<DocVO> readDocList(String categoryCode);
 	
 	/**
 	 * 문서 상세

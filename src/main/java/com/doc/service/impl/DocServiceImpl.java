@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.doc.domain.CategoryVO;
 import com.doc.domain.DetailVO;
@@ -12,16 +13,15 @@ import com.doc.service.DocService;
 import com.mappers.DocMapper;
 
 @Service
+@Transactional
 public class DocServiceImpl implements DocService {
-	
-	//@Autowired docMapper docMapper;
 	
 	@Autowired 
 	private DocMapper docMapper;
 	
 	@Override
-	public List<DocVO> readDocList(CategoryVO categoryVO) {
-		return docMapper.readDocList(categoryVO);
+	public List<DocVO> readDocList(String categoryCode) {
+		return docMapper.readDocList(categoryCode);
 	}
 
 	@Override

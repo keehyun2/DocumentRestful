@@ -9,16 +9,16 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mappers.UserMapper;
 import com.user.domain.UserVO;
 import com.user.service.UserService;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
-	//@Autowired userMapper userMapper;
-	
 	@Autowired UserMapper userMapper;
 	
 	private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int createUser(UserVO userVO) {
 		String rawPassword = userVO.getPassword();
-		String encodedPassword = new BCryptPasswordEncoder().encode(rawPassword);
+		String encodedPassword = passwordEncoder.encode(rawPassword);
 		userVO.setPassword(encodedPassword);
 		userMapper.createUser(userVO);
 		userMapper.createAuthorities(userVO);

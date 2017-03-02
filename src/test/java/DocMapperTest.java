@@ -39,7 +39,7 @@ public class DocMapperTest {
 		
 		docMapper = sqlSession.getMapper(DocMapper.class);
 		
-		docMapper.readDocList(new CategoryVO());
+		docMapper.readDocList(null);
 		
 		//sqlSession.selectList("com.doc.mappreadDocList");
 		

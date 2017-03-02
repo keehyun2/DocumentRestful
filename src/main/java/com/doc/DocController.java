@@ -1,5 +1,6 @@
 package com.doc;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -8,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -47,8 +50,9 @@ public class DocController {
 	 */
 	@RequestMapping(method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseStatus(HttpStatus.OK)
-	public List<DocVO> readDocList(@RequestBody CategoryVO categoryVO) {
-		return docService.readDocList(categoryVO);
+	public List<DocVO> readDocList(String categoryCode ) {
+		LOGGER.info(categoryCode );
+		return docService.readDocList(categoryCode);
 	}
 	
 	/**
@@ -64,12 +68,15 @@ public class DocController {
 	
 	/**
 	 * 문서 생성 (RequestMethod.POST)
-	 * @param docVO, detailVO
+	 * @param detailVO
 	 * @return
 	 */
 	@RequestMapping(method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
-	public int createDoc(@RequestBody DetailVO detailVO) {
+	public int createDoc(@RequestBody DetailVO detailVO, Principal principal) {
+		LOGGER.info(principal.getName());
+		detailVO.setWriter(principal.getName());
+		//SecurityContextHolder.getContext().getAuthentication().getPrincipal().
 		return docService.createDoc(detailVO);
 	}
 	
@@ -80,7 +87,9 @@ public class DocController {
 	 */
 	@RequestMapping(method=RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseStatus(HttpStatus.OK)
-	public int deleteDoc(@RequestBody DetailVO detailVO) {
+	public int deleteDoc(@RequestBody DetailVO detailVO, Principal principal) {
+		
+		LOGGER.info(principal.getName());
 		return docService.deleteDoc(detailVO);
 	}
 

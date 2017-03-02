@@ -19,8 +19,8 @@
     	SELECT A.DOC_IDX,A.TITLE, B.NAME, 
     			TO_CHAR(A.WRITE_DATE,'MM-DD') AS WRITE_DATE, A.VIEW_COUNT, A.CATEGORY
 			FROM DOC_SUMMARY A INNER JOIN USER B ON A.WRITER = B.USERNAME
-			<if test="code != null">
-				WHERE CATEGORY = #{code}
+			<if test="_parameter != null">
+				WHERE CATEGORY = #{categoryCode}
 			</if>
     </select>
     
