@@ -1,20 +1,11 @@
-<프로젝트 분석>
-모바일용 반응형 웹.  일단 h2 디비에 연결해서 build, 모바일환경에서는 세션이 끊어지는 경우가 자주 발생함. 
-restful server 부터 개발하고 나머지 frontend 개발 
-일단 부트스트랩 템플릿 찾기. 
-일단 개인 oracle 연동해서 만들기 차후에 h2 연동. 
-
-spring-boot 하고 mybatis 연동된 예제 찾기. 
-
 /mail mail list 입력받아서 각 mail 사이트 url 전송 - 예제 어렵지 않음 - smtp 정보만 준비되면 만들기 수월함. 
-/login (POST )>> 일단 spring security 로  > spring security 로 db 연동 table_user (id,pw,사용자 인증여부) 
-/user (GET) > 읽어서 json 으로 resturn table_list (idx,제목,조회수,입력일,입력자)
-/user/detail (GET)> 읽어서 json 으로 resturn table_detail (idx,상세 내용)
 
 <restful server 개발환경>
 java8, spring-boot, spring-security, mybatis, oracle or h2db, logback
 
 <front end web 개발환경>
+모바일용 반응형 웹.  
+일단 부트스트랩 템플릿 찾기.
 react, jquery, bootstrap, angular 
 >> 시간 좀 걸릴듯... 
 

@@ -16,12 +16,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.Application;
-import com.doc.domain.DetailVO;
-import com.doc.domain.DocVO;
-import com.doc.service.DocService;
-import com.user.domain.UserVO;
-import com.user.service.UserService;
+import com.socketmessage.doc.Application;
+import com.socketmessage.doc.doc.domain.DetailVO;
+import com.socketmessage.doc.doc.domain.DocVO;
+import com.socketmessage.doc.doc.service.DocService;
+import com.socketmessage.doc.user.domain.UserVO;
+import com.socketmessage.doc.user.service.UserService;
 
 @SpringApplicationConfiguration(classes = Application.class)
 @RunWith(SpringJUnit4ClassRunner.class)

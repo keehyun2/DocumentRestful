@@ -19,11 +19,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.Application;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.user.domain.AuthenticationRequestVO;
-import com.user.domain.UserVO;
-import com.user.service.UserService;
+import com.socketmessage.doc.Application;
+import com.socketmessage.doc.user.domain.AuthenticationRequestVO;
+import com.socketmessage.doc.user.domain.UserVO;
+import com.socketmessage.doc.user.service.UserService;
 
 @SpringApplicationConfiguration(classes = Application.class)
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -42,7 +42,7 @@ public class UserControllerTest {
                    .webAppContextSetup(wac)
                    .build();
         userVO = new UserVO(); 
- 		userVO.setUsername("keehyun21X");
+ 		userVO.setUsername("keehyun21X1");
  		userVO.setPassword("1111");
  		userVO.setAccountNonExpired(true);
  		userVO.setAccountNonLocked(true);
@@ -58,7 +58,7 @@ public class UserControllerTest {
     @Test
     public void loginTest() throws Exception {
          AuthenticationRequestVO request = new AuthenticationRequestVO();
-         request.setUsername("keehyun21X");
+         request.setUsername("keehyun21X1");
          request.setPassword("1111");
          
          ObjectMapper om = new ObjectMapper();

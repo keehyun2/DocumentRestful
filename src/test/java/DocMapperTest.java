@@ -8,10 +8,10 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.Application;
-import com.doc.domain.CategoryVO;
-import com.doc.domain.DetailVO;
-import com.mappers.DocMapper;
+import com.socketmessage.doc.Application;
+import com.socketmessage.doc.doc.domain.CategoryVO;
+import com.socketmessage.doc.doc.domain.DetailVO;
+import com.socketmessage.doc.mappers.DocMapper;
 
 @SpringApplicationConfiguration(classes = Application.class)
 @RunWith(SpringJUnit4ClassRunner.class)
