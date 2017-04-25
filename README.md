@@ -1,4 +1,4 @@
-#Dcument Restful Server
+# Dcument Restful Server
 
 ## Overview
 
@@ -19,7 +19,7 @@ You must be logged in to get information.
 - java framework : **Spring-boot, Spring-security**
 - build system : **Gradle 3.2.1**
 - ORM : **mybatis3**
-- DB : **H2(default) **
+- DB : **H2(default)**
 
 ## Usage
 
