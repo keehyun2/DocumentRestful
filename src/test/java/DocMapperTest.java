@@ -4,17 +4,16 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.socketmessage.doc.Application;
-import com.socketmessage.doc.doc.domain.CategoryVO;
-import com.socketmessage.doc.doc.domain.DetailVO;
-import com.socketmessage.doc.mappers.DocMapper;
+import com.khphub.Application;
+import com.khphub.doc.domain.DetailVO;
+import com.khphub.mappers.DocMapper;
 
-@SpringApplicationConfiguration(classes = Application.class)
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = Application.class)
 @WebAppConfiguration
 public class DocMapperTest {
 

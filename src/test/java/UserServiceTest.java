@@ -9,22 +9,22 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.socketmessage.doc.Application;
-import com.socketmessage.doc.doc.domain.DetailVO;
-import com.socketmessage.doc.doc.domain.DocVO;
-import com.socketmessage.doc.doc.service.DocService;
-import com.socketmessage.doc.user.domain.UserVO;
-import com.socketmessage.doc.user.service.UserService;
+import com.khphub.Application;
+import com.khphub.doc.domain.DetailVO;
+import com.khphub.doc.domain.DocVO;
+import com.khphub.doc.service.DocService;
+import com.khphub.user.domain.UserVO;
+import com.khphub.user.service.UserService;
 
-@SpringApplicationConfiguration(classes = Application.class)
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = Application.class)
 @WebAppConfiguration
 public class UserServiceTest {
 

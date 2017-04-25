@@ -3,10 +3,10 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
         
-<mapper namespace="com.socketmessage.doc.mappers.DocMapper">
+<mapper namespace="com.khphub.mappers.DocMapper">
 
     <!-- 문서 분류 목록 -->
-    <select id="readCategory" resultType="com.socketmessage.doc.doc.domain.CategoryVO">
+    <select id="readCategory" resultType="com.khphub.doc.domain.CategoryVO">
     	SELECT CODE, UPPER_CODE, NAME
 			FROM DOC_CATEGORY
 				START WITH UPPER_CODE IS NULL
@@ -15,7 +15,7 @@
     </select>
     
     <!-- 문서 요약 목록 -->
-    <select id="readDocList" resultType="com.socketmessage.doc.doc.domain.DocVO">
+    <select id="readDocList" resultType="com.khphub.doc.domain.DocVO">
     	SELECT A.DOC_IDX,A.TITLE, B.NAME, 
     			TO_CHAR(A.WRITE_DATE,'MM-DD') AS WRITE_DATE, A.VIEW_COUNT, A.CATEGORY
 			FROM DOC_SUMMARY A INNER JOIN USER B ON A.WRITER = B.USERNAME
@@ -25,7 +25,7 @@
     </select>
     
     <!-- 문서 상세 -->
-    <select id="readDocDetail" resultType="com.socketmessage.doc.doc.domain.DetailVO">
+    <select id="readDocDetail" resultType="com.khphub.doc.domain.DetailVO">
     	SELECT A.DOC_IDX, A.TITLE, B.DETAIL, C.NAME,
 			TO_CHAR(A.WRITE_DATE,'MM-DD') AS WRITE_DATE, A.VIEW_COUNT
 		FROM DOC_SUMMARY A 
@@ -35,7 +35,7 @@
     </select>
     
     <!-- 문서 요약 생성 -->
-    <insert id="createDocSummary" parameterType="com.socketmessage.doc.doc.domain.DetailVO" >
+    <insert id="createDocSummary" parameterType="com.khphub.doc.domain.DetailVO" >
     	<selectKey keyProperty="docIdx" resultType="String" order="BEFORE">
     		SELECT LPAD(DOC_SUMMARY_SEQ.NEXTVAL, 10, '0') FROM DUAL
     	</selectKey>
@@ -44,32 +44,32 @@
     </insert>
     
     <!-- 문서 요약 수정 -->
-    <update id="updateDocSummary" parameterType="com.socketmessage.doc.doc.domain.DetailVO" >
+    <update id="updateDocSummary" parameterType="com.khphub.doc.domain.DetailVO" >
     	UPDATE DOC_SUMMARY SET 
    			TITLE = #{title}, REWRITER = #{rewriter}, REWRITE_DATE = sysdate, CATEGORY = #{category}
    		WHERE DOC_IDX = #{docIdx}
     </update>
     
     <!-- 문서 요약 삭제 -->
-    <delete id="deleteDocSummary" parameterType="com.socketmessage.doc.doc.domain.DetailVO" >
+    <delete id="deleteDocSummary" parameterType="com.khphub.doc.domain.DetailVO" >
     	DELETE DOC_SUMMARY WHERE DOC_IDX = #{docIdx}
     </delete>
     
     <!-- 문서 상세 생성 -->
-    <insert id="createDocDetail" parameterType="com.socketmessage.doc.doc.domain.DetailVO" >
+    <insert id="createDocDetail" parameterType="com.khphub.doc.domain.DetailVO" >
     	INSERT INTO DOC_DETAIL (DOC_IDX, DETAIL) 
     		VALUES (#{docIdx}, #{detail});
     </insert>
     
     <!-- 문서 상세 수정 -->
-    <update id="updateDocDetail" parameterType="com.socketmessage.doc.doc.domain.DetailVO" >
+    <update id="updateDocDetail" parameterType="com.khphub.doc.domain.DetailVO" >
     	UPDATE DOC_DETAIL SET 
    			DETAIL = #{detail}
    		WHERE DOC_IDX = #{docIdx}
     </update>
     
     <!-- 문서 상세 삭제 -->
-    <delete id="deleteDocDetail" parameterType="com.socketmessage.doc.doc.domain.DetailVO" >
+    <delete id="deleteDocDetail" parameterType="com.khphub.doc.domain.DetailVO" >
     	DELETE DOC_DETAIL WHERE DOC_IDX = #{docIdx}
     </delete>
     
