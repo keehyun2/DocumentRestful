@@ -1,5 +1,7 @@
 package com.khphub.user;
 
+import java.security.Principal;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.khphub.doc.domain.DetailVO;
 import com.khphub.user.domain.AuthenticationRequestVO;
 import com.khphub.user.domain.AuthenticationToken;
 import com.khphub.user.domain.UserVO;
@@ -60,5 +63,18 @@ public class UserController {
         return new AuthenticationToken(user.getUsername(), user.getName(), user.getAuthorities(), session.getId());
 	}
 	
+	/**
+	 * Create Document (RequestMethod.POST)
+	 * @param detailVO
+	 * @return
+	 */
+	/*@RequestMapping(method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseStatus(HttpStatus.CREATED)
+	public int createDoc(@RequestBody DetailVO detailVO, Principal principal) {
+		LOGGER.info(principal.getName());
+		detailVO.setWriter(principal.getName());
+		//SecurityContextHolder.getContext().getAuthentication().getPrincipal().
+		return docService.createDoc(detailVO);
+	}*/
 
 }
