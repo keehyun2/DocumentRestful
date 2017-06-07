@@ -1,7 +1,5 @@
 package com.khphub.user;
 
-import java.security.Principal;
-
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -20,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.khphub.doc.domain.DetailVO;
 import com.khphub.user.domain.AuthenticationRequestVO;
 import com.khphub.user.domain.AuthenticationToken;
 import com.khphub.user.domain.UserVO;

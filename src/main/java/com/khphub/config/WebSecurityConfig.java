@@ -7,6 +7,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -29,12 +30,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         		.and()
             .authorizeRequests()
                 .antMatchers("/user/login").permitAll()
+                //.antMatchers("/api/**").permitAll()
+                //.antMatchers("/resources/**").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .antMatchers("/doc","/user").hasAuthority("USER")
         		//.antMatchers("/admin").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
             .logout();
+    }
+    
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+    	web.ignoring().antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources/**", 
+    				"/configuration/security", "/swagger-ui.html", "/webjars/**");
     }
 
     @Override

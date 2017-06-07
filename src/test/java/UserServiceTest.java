@@ -39,11 +39,11 @@ public class UserServiceTest {
 	@Before
 	public void setup(){
 		userVO = new UserVO(); 
-		userVO.setUsername("keehyun2");
-		userVO.setPassword("1111");
+		userVO.setUsername("admin");
+		userVO.setPassword("admin");
 		userVO.setAccountNonExpired(true);
 		userVO.setAccountNonLocked(true);
-		userVO.setName("keehyun Park");
+		userVO.setName("administrator");
 		userVO.setCredentialsNonExpired(true);
 		userVO.setEnabled(true);
 		userVO.setAuthorities(AuthorityUtils.createAuthorityList("USER"));
@@ -76,7 +76,7 @@ public class UserServiceTest {
 		userService.readAuthorities(userVO.getUsername());
 		
 		PasswordEncoder passwordEncoder = userService.passwordEncoder();
-		assertThat(passwordEncoder.matches("1111", userVO.getPassword()), is(true));
+		assertThat(passwordEncoder.matches("admin", userVO.getPassword()), is(true));
 		
 		Collection<? extends GrantedAuthority> authorities1 = userVO1.getAuthorities();
 		Iterator<? extends GrantedAuthority> it = authorities1.iterator();
