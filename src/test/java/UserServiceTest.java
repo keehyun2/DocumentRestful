@@ -49,10 +49,11 @@ public class UserServiceTest {
 		userVO.setAuthorities(AuthorityUtils.createAuthorityList("USER"));
 		
 		detailVO = new DetailVO(); 
-		detailVO.setWriter("keehyun2");
+		detailVO.setWriter("admin");
 		detailVO.setTitle("제목 제목 제목 제목");
 		detailVO.setViewCount(0);
 		detailVO.setDetail("문서 상세 문서 상세 문서 상세 문서 상세 문서 상세 문서 상세 ");
+		detailVO.setCategory("00000");
 	}
 	
 	@Test
@@ -69,8 +70,8 @@ public class UserServiceTest {
 		
 		docService.createDoc(detailVO);
 		
-		userService.deleteUser(userVO.getUsername());
-		userService.createUser(userVO);
+		//userService.deleteUser(userVO.getUsername());
+		//userService.createUser(userVO);
 		UserVO userVO1 = userService.readUser(userVO.getUsername());
 		assertThat(userVO.getUsername(), is(userVO1.getUsername()));
 		userService.readAuthorities(userVO.getUsername());

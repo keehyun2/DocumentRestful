@@ -9,7 +9,7 @@
     <select id="readUser" parameterType="String" resultType="com.khphub.user.domain.UserVO">
  		SELECT USERNAME, PASSWORD, NAME, ACCOUNT_NON_EXPIRED,  
 			ACCOUNT_NON_LOCKED, CREDENTIALS_NON_EXPIRED, ENABLED, REG_DATE
-		FROM USER WHERE USERNAME = #{username}
+		FROM DOC_USER WHERE USERNAME = #{username}
     </select>
     
     <!-- 사용자 권한 정보 -->
@@ -19,7 +19,7 @@
     
     <!-- 사용자 생성 -->
     <insert id="createUser" parameterType="com.khphub.user.domain.UserVO" >
- 		 INSERT INTO USER (USERNAME, PASSWORD, NAME, ACCOUNT_NON_EXPIRED, ACCOUNT_NON_LOCKED, CREDENTIALS_NON_EXPIRED, ENABLED, REG_DATE)
+ 		 INSERT INTO DOC_USER (USERNAME, PASSWORD, NAME, ACCOUNT_NON_EXPIRED, ACCOUNT_NON_LOCKED, CREDENTIALS_NON_EXPIRED, ENABLED, REG_DATE)
  		 	VALUES (#{username}, #{password}, #{name}, #{accountNonExpired}, #{accountNonLocked}, #{credentialsNonExpired}, #{enabled}, sysdate)
     </insert>
     
@@ -33,7 +33,7 @@
     </insert>
     
     <delete id="deleteUser" parameterType="String" >
-    	DELETE FROM USER WHERE USERNAME = #{username} 
+    	DELETE FROM DOC_USER WHERE USERNAME = #{username} 
     </delete>
     
     <delete id="deleteAuthorities" parameterType="String" >

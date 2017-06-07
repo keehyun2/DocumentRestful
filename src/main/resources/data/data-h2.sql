@@ -6,6 +6,8 @@ INSERT INTO DOC_CATEGORY (CODE, UPPER_CODE, NAME) VALUES('00004', '00001', '분�
 INSERT INTO DOC_CATEGORY (CODE, UPPER_CODE, NAME) VALUES('00005', '00002', '분류2-1');
 INSERT INTO DOC_CATEGORY (CODE, UPPER_CODE, NAME) VALUES('00006', '00002', '분류2-2');
 
+INSERT INTO DOC_USER (USERNAME,PASSWORD,NAME,ACCOUNT_NON_EXPIRED,ACCOUNT_NON_LOCKED,CREDENTIALS_NON_EXPIRED,ENABLED,REG_DATE) values ('admin','$2a$10$251K6jkdt103l/79Me1PS.waPNGCBP2a.qu.uC9Lh1ZlfAUKJQfwG','administrator',1,1,1,1,SYSDATE);
+
 -- user data는 password 암호화때문에 dml 만들지 못함.
 -- doc data는 seq 값 return 및, username 추가하지 못해서 만들지못함.  
 

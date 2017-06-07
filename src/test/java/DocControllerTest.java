@@ -42,8 +42,8 @@ public class DocControllerTest {
     @Test
     public void loginTest() throws Exception {
          AuthenticationRequestVO request = new AuthenticationRequestVO();
-         request.setUsername("keehyun2");
-         request.setPassword("1111");
+         request.setUsername("admin	");
+         request.setPassword("admin");
          
          ObjectMapper om = new ObjectMapper();
          

@@ -18,7 +18,7 @@
     <select id="readDocList" resultType="com.khphub.doc.domain.DocVO">
     	SELECT A.DOC_IDX,A.TITLE, B.NAME, 
     			TO_CHAR(A.WRITE_DATE,'MM-DD') AS WRITE_DATE, A.VIEW_COUNT, A.CATEGORY
-			FROM DOC_SUMMARY A INNER JOIN USER B ON A.WRITER = B.USERNAME
+			FROM DOC_SUMMARY A INNER JOIN DOC_USER B ON A.WRITER = B.USERNAME
 			<if test="_parameter != null">
 				WHERE CATEGORY = #{categoryCode}
 			</if>
@@ -30,7 +30,7 @@
 			TO_CHAR(A.WRITE_DATE,'MM-DD') AS WRITE_DATE, A.VIEW_COUNT
 		FROM DOC_SUMMARY A 
 			INNER JOIN DOC_DETAIL B ON A.DOC_IDX = B.DOC_IDX
-			INNER JOIN USER C ON A.WRITER = C.USERNAME
+			INNER JOIN DOC_USER C ON A.WRITER = C.USERNAME
 		WHERE A.DOC_IDX = #{docIdx}
     </select>
     
@@ -40,7 +40,7 @@
     		SELECT LPAD(DOC_SUMMARY_SEQ.NEXTVAL, 10, '0') FROM DUAL
     	</selectKey>
     	INSERT INTO DOC_SUMMARY (DOC_IDX, TITLE, WRITER, WRITE_DATE, REWRITER, REWRITE_DATE, VIEW_COUNT, CATEGORY ) 
-    		VALUES (#{docIdx}, #{title}, #{writer}, sysdate, null, null, 0, #{category});
+    		VALUES (#{docIdx}, #{title}, #{writer}, sysdate, null, null, 0, #{category})
     </insert>
     
     <!-- 문서 요약 수정 -->
@@ -58,7 +58,7 @@
     <!-- 문서 상세 생성 -->
     <insert id="createDocDetail" parameterType="com.khphub.doc.domain.DetailVO" >
     	INSERT INTO DOC_DETAIL (DOC_IDX, DETAIL) 
-    		VALUES (#{docIdx}, #{detail});
+    		VALUES (#{docIdx}, #{detail})
     </insert>
     
     <!-- 문서 상세 수정 -->
